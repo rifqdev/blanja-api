@@ -20,12 +20,31 @@ const sendErrorResponse = (res, message, errorDetails, code) => {
   res.status(codeStatus).json(error);
 };
 
-const paginateData = async (Model, page, limit, code) => {
-  const statusCode = code || 200;
+const datasResponses = async (
+  res,
+  Model,
+  page,
+  limit,
+  keyword,
+  attributes,
+  order
+) => {
+  const statusCode = 200;
   const offset = (page - 1) * limit;
   const result = await Model.findAll({
+    where: {
+      [Op.or]: [
+        {
+          title: {
+            [Op.like]: `%${keyword}%`,
+          },
+        },
+      ],
+    },
     limit: limit,
     offset: offset,
+    attributes: attributes,
+    order: order,
   });
 
   const totalCount = await Model.count();
@@ -34,6 +53,7 @@ const paginateData = async (Model, page, limit, code) => {
   const data = {
     currentPage: page,
     totalPages: totalPages,
+    totalData: totalCount,
     data: result,
   };
 
@@ -43,5 +63,5 @@ const paginateData = async (Model, page, limit, code) => {
 module.exports = {
   sendSuccessResponse,
   sendErrorResponse,
-  paginateData,
+  datasResponses,
 };
