@@ -1,10 +1,14 @@
 {
-  "name": "be-codebase",
+  "name": "blanja-api",
   "version": "1.0.0",
   "description": "codebase backend with midlewares jsonwebtoken, upload with multer to cloudinary, have some response helper, and has integration with MySQL using sequelize",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "migration:generate": "npx sequelize-cli migration:generate --name",
+    "migration:migrate": "npx sequelize-cli db:migrate",
+    "migration:undo": "npx sequelize-cli db:migrate:undo",
+    "migration:undo:all": "npx sequelize-cli db:migrate:undo:all"
   },
   "author": "rifqdev",
   "license": "ISC",
@@ -12,6 +16,7 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cloudinary": "^1.40.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -19,7 +24,8 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "mysql2": "^3.6.1",
-    "sequelize": "^6.33.0"
+    "mysql2": "^3.10.3",
+    "nodemailer": "^6.9.14",
+    "sequelize": "^6.37.3"
   }
 }

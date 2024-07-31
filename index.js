@@ -23,7 +23,7 @@ const test = async () => {
   try {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
-    sequelize.sync();
+    sequelize.sync({ alter: true });
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
@@ -35,7 +35,7 @@ const corsOptions = {
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-app.use("/api/v1/", cors(corsOptions), indexRoutes);
+app.use("/api", cors(corsOptions), indexRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
