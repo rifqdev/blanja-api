@@ -27,7 +27,7 @@ const uploadToCloudinary = async (mainFolderName, locaFilePath, originalname) =>
     .catch((error) => {
       // Remove file from local uploads folder
       fs.unlinkSync(locaFilePath);
-      return { message: "Fail" };
+      return { message: "Fail", errorDetail: error };
     });
 };
 

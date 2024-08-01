@@ -123,7 +123,7 @@ const editProfile = async (req, res) => {
       const mainFolder = getUser.dataValues.account_type === "custommer" ? "blanja/custommer" : "blanja/seller";
       const photoName = Date.now() + path.extname(req.file.originalname);
       resUpload = await uploadToCloudinary(mainFolder, req.file.path, photoName);
-      if (resUpload.message === "Fail") throw new Error("Failed updload photo to cloudinary");
+      if (resUpload.message === "Fail") throw new Error(`Failed updload photo to cloudinary, Detail: ${resUpload.errorDetail}`);
     } else {
       resUpload = {
         url: getUser.dataValues.photo,
