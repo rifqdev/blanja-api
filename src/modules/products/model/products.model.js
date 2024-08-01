@@ -40,6 +40,9 @@ const Products = sequelize.define(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    condition: {
+      type: DataTypes.STRING,
+    },
     createdAt: {
       type: DataTypes.DATE,
     },

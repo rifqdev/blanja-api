@@ -98,7 +98,7 @@ const listNewProducts = async (req, res) => {
   try {
     const page = 1;
     const limit = 10;
-    const attributes = ["id", "name", "photo", "sold"];
+    const attributes = ["id", "name", "photo", "sold", "price"];
     const order = [["createdAt", "DESC"]];
     const where = null;
     const include = {
@@ -118,6 +118,7 @@ const listNewProducts = async (req, res) => {
           "account_type",
           "store_description",
           "token",
+          "wallet",
           "createdAt",
           "updatedAt",
         ],
@@ -134,7 +135,7 @@ const listPopularProducts = async (req, res) => {
   try {
     const page = 1;
     const limit = 10;
-    const attributes = ["id", "name", "photo", "sold"];
+    const attributes = ["id", "name", "photo", "sold", "price"];
     const order = [["sold", "DESC"]];
     const where = null;
     const include = {
@@ -153,6 +154,7 @@ const listPopularProducts = async (req, res) => {
           "address",
           "account_type",
           "store_description",
+          "wallet",
           "token",
           "createdAt",
           "updatedAt",

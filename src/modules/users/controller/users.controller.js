@@ -152,10 +152,23 @@ const editProfile = async (req, res) => {
   }
 };
 
+const getDetailProfile = async (req, res) => {
+  try {
+    const id = req.user.userId;
+    const result = await Users.findOne({ where: { id }, attributes: { exclude: ["password", "token"] } });
+    if (!result) throw new Error("account not found");
+
+    return wrapper.sendSuccessResponse(res, "successfully get profile", result, 200);
+  } catch (error) {
+    return wrapper.sendErrorResponse(res, "failed get profile", error.message, 500);
+  }
+};
+
 module.exports = {
   register,
   verificationEmail,
   login,
   refreshToken,
   editProfile,
+  getDetailProfile,
 };

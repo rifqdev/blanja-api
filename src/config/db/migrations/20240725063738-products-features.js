@@ -38,6 +38,9 @@ module.exports = {
       sold: {
         type: Sequelize.INTEGER,
       },
+      condition: {
+        type: DataTypes.STRING,
+      },
       createdAt: {
         type: Sequelize.DATE,
       },
