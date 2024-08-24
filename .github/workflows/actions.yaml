@@ -32,4 +32,4 @@ jobs:
           script: |
             # Perintah untuk merestart server di cPanel
             # Contoh: restart Apache
-            sudo systemctl restart httpd
+            systemctl restart httpd
