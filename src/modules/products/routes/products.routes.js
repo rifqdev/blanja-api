@@ -7,12 +7,13 @@ const { upload } = require("../../../middlewares/upload");
 router.post("/", jwtMiddleware.authenticateJWT, upload.array("photo"), productsControllers.addProduct);
 router.put("/:id", jwtMiddleware.authenticateJWT, upload.array("photo"), productsControllers.editProduct);
 router.delete("/:id", jwtMiddleware.authenticateJWT, productsControllers.deleteProduct);
+router.get("/seller", jwtMiddleware.authenticateJWT, productsControllers.getProductBySellerId);
+router.get("/seller/:id", jwtMiddleware.authenticateJWT, productsControllers.detailProductSeller);
 router.get("/new", productsControllers.listNewProducts);
 router.get("/popular", productsControllers.listPopularProducts);
 router.get("/search", productsControllers.listSearchProducts);
 router.get("/:id", productsControllers.detailProduct);
 router.get("/recents/:categoryId", productsControllers.recentsProducts);
 router.get("/category/:categoryId", productsControllers.listProductsByCategory);
-router.get("/sller", jwtMiddleware.authenticateJWT, productsControllers.getProductBySellerId);
 
 module.exports = router;

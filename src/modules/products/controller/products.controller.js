@@ -323,7 +323,7 @@ const getProductBySellerId = async (req, res) => {
   try {
     const page = 1;
     const limit = 10;
-    const attributes = ["id", "name", "photo", "sold", "price"];
+    const attributes = ["id", "name", "photo", "sold", "price", "stock"];
     const order = [["createdAt", "DESC"]];
     const where = {seller_id: req.user.userId};
     const include = {
@@ -356,6 +356,42 @@ const getProductBySellerId = async (req, res) => {
   }
 };
 
+const detailProductSeller = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const sellerId = req.user.userId
+
+    const include = {
+      model: Users,
+      attributes: {
+        exclude: [
+          "id",
+          "name",
+          "email",
+          "password",
+          "phone_number",
+          "gender",
+          "birth",
+          "photo",
+          "is_verified",
+          "account_type",
+          "store_description",
+          "token",
+          "createdAt",
+          "updatedAt",
+        ],
+      },
+    };
+
+    const result = await Products.findOne({ where: { id, seller_id: sellerId }, include, attributes: { exclude: ["seller_id"] } });
+    if (!result) throw new Error("product not found");
+
+    return wrapper.sendSuccessResponse(res, "get detail product successfully", result, 200);
+  } catch (error) {
+    return wrapper.sendErrorResponse(res, "get detail product failed", error.message, 500);
+  }
+};
+
 module.exports = {
   addProduct,
   editProduct,
@@ -366,5 +402,6 @@ module.exports = {
   detailProduct,
   recentsProducts,
   listProductsByCategory,
-  getProductBySellerId
+  getProductBySellerId,
+  detailProductSeller
 };
