@@ -102,9 +102,22 @@ const listAddress = async (req, res) => {
   }
 };
 
+const getPrimaryAddress = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const result = await Address.findOne({ where: { user_id: userId, primary_address: true } });
+
+    return wrapper.sendSuccessResponse(res, "get primary address successfully", result ? result : [], 200);
+  } catch (error) {
+    return wrapper.sendSuccessResponse(res, "get primary address failed", error.message, 500);
+  }
+};
+
 module.exports = {
   addAddress,
   editAddress,
   setPrimaryAddress,
   listAddress,
+  getPrimaryAddress
 };

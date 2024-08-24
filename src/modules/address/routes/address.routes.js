@@ -6,5 +6,6 @@ router.post("/", addressControllers.addAddress);
 router.put("/:id", addressControllers.editAddress);
 router.put("/primary/:id", addressControllers.setPrimaryAddress);
 router.get("/", addressControllers.listAddress);
+router.get("/primary", addressControllers.getPrimaryAddress);
 
 module.exports = router;
