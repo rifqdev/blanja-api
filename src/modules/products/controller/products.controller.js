@@ -319,6 +319,43 @@ const listProductsByCategory = async (req, res) => {
   }
 };
 
+const getProductBySellerId = async (req, res) => {
+  try {
+    const page = 1;
+    const limit = 10;
+    const attributes = ["id", "name", "photo", "sold", "price"];
+    const order = [["createdAt", "DESC"]];
+    const where = {seller_id: req.user.userId};
+    const include = {
+      model: Users,
+      attributes: {
+        exclude: [
+          "id",
+          "name",
+          "email",
+          "password",
+          "phone_number",
+          "gender",
+          "birth",
+          "photo",
+          "is_verified",
+          "address",
+          "account_type",
+          "store_description",
+          "token",
+          "wallet",
+          "createdAt",
+          "updatedAt",
+        ],
+      },
+    };
+
+    await wrapper.paginateData(res, Products, where, page, limit, attributes, order, include);
+  } catch (error) {
+    return wrapper.sendErrorResponse(res, "failed get list new products", error.message, 500);
+  }
+};
+
 module.exports = {
   addProduct,
   editProduct,
@@ -329,4 +366,5 @@ module.exports = {
   detailProduct,
   recentsProducts,
   listProductsByCategory,
+  getProductBySellerId
 };

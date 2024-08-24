@@ -13,5 +13,6 @@ router.get("/search", productsControllers.listSearchProducts);
 router.get("/:id", productsControllers.detailProduct);
 router.get("/recents/:categoryId", productsControllers.recentsProducts);
 router.get("/category/:categoryId", productsControllers.listProductsByCategory);
+router.get("/sller", jwtMiddleware.authenticateJWT, productsControllers.getProductBySellerId);
 
 module.exports = router;
