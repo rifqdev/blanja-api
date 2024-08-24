@@ -22,14 +22,3 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /
-
-      - name: Restart server
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            # Perintah untuk merestart server di cPanel
-            # Contoh: restart Apache
-            sudo systemctl restart httpd
