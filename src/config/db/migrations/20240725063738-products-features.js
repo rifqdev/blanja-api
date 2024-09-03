@@ -39,7 +39,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       condition: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
       },
       createdAt: {
         type: Sequelize.DATE,
