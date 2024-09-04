@@ -172,7 +172,7 @@ const listSearchProducts = async (req, res) => {
     const key = req.query.key || "";
     const page = 1;
     const limit = 10;
-    const attributes = ["id", "name", "photo", "sold"];
+    const attributes = ["id", "name", "photo", "sold", "price"];
     const order = [["sold", "DESC"]];
     const where = { name: { [Op.like]: `%${key}%` } };
     const include = {
