@@ -246,7 +246,7 @@ const recentsProducts = async (req, res) => {
 
     const page = 1;
     const limit = 10;
-    const attributes = ["id", "name", "photo", "sold"];
+    const attributes = ["id", "name", "photo", "sold", "price"];
     const order = [["createdAt", "DESC"]];
     const where = { category_id: categoryId };
     const include = {
