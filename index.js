@@ -30,8 +30,9 @@ const test = async () => {
 };
 test();
 
+const frontendUrls = process.env.FRONTEND_URL.replace(/[\[\]]/g, "").split(",");
 const corsOptions = {
-  origin: [process.env.FRONTEND_URL],
+  origin: frontendUrls,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
