@@ -106,7 +106,7 @@ const createOrder = async (req, res) => {
 
       for (const x of payload.products) {
         const getProduct = await Products.findOne({ where: { id: x.product_id } });
-        await Products.update({ stock: getProduct.dataValues.stock - x.quantity }, { where: { id: x.product_id } });
+        await Products.update({ stock: getProduct.dataValues.stock - x.quantity, sold: getProduct.dataValues.sold + x.quantity }, { where: { id: x.product_id } });
       }
     }
 

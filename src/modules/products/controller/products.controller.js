@@ -136,7 +136,7 @@ const listPopularProducts = async (req, res) => {
     const page = 1;
     const limit = 10;
     const attributes = ["id", "name", "photo", "sold", "price"];
-    const order = [["sold", "asc"]];
+    const order = [["sold", "desc"]];
     const where = null;
     const include = {
       model: Users,
